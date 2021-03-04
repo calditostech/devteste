@@ -1,0 +1,108 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Recicle;
+use Illuminate\Http\Request;
+
+class RecicleController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $data = Post::latest()->paginate(5);
+    
+        return view('recicle.index',compact('data'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('recicle.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+    
+        Post::create($request->all());
+     
+        return redirect()->route('recicle.index')
+                        ->with('success','Post created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Recicle  $recicle
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Recicle $recicle)
+    {
+        return view('recicle.show',compact('post'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Recicle  $recicle
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Recicle $recicle)
+    {
+        return view('recicle.edit',compact('post'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Recicle  $recicle
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Recicle $recicle)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+    
+        $post->update($request->all());
+    
+        return redirect()->route('recicle.index')
+                        ->with('success','Post updated successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Recicle  $recicle
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Recicle $recicle)
+    {
+        $post->delete();
+    
+        return redirect()->route('recicle.index')
+                        ->with('success','Post deleted successfully');
+
+    }
+}
