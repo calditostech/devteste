@@ -1,4 +1,4 @@
-@extends('recicles.layout')
+@extends('recicle.layout')
    
 @section('content')
     <div class="row">
@@ -7,14 +7,14 @@
                 <h2>Edit Product</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('recicles.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('recicle.index') }}"> Back</a>
             </div>
         </div>
     </div>
    
     @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <strong>Opa!</strong> There were some problems with your input.<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -23,7 +23,7 @@
         </div>
     @endif
   
-    <form action="{{ route('recicles.update',$post->id) }}" method="POST">
+    <form action="{{ route('recicle.update',$recicle->id) }}" method="POST">
         @csrf
         @method('PUT')
    
@@ -31,13 +31,25 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Nome:</strong>
-                    <input type="text" name="title" value="{{ $post->nome }}" class="form-control" placeholder="Nome">
+                    <input type="text" name="nome" value="{{ $recicle->nome }}" class="form-control" placeholder="Nome">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Endereço:</strong>
-                    <textarea class="form-control" style="height:150px" name="description" placeholder="Detail">{{ $post->description }}</textarea>
+                    <input type="text" name="endereco" value="{{ $recicle->endereco }}" class="form-control" placeholder="Endereço">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Descrição:</strong>
+                    <input type="text" name="descricao" value="{{ $recicle->descricao }}" class="form-control" placeholder="Descrição">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Tipo de reciclagem:</strong>
+                    <input type="text" name="tipo_reciclagem" value="{{ $recicle->tipoReciclagem }}" class="form-control" placeholder="Tipo de reciclagem">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

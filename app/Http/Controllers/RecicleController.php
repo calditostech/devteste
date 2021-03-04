@@ -48,7 +48,7 @@ class RecicleController extends Controller
         Recicle::create($request->all());
      
         return redirect()->route('recicle.index')
-                        ->with('success','Post created successfully.');
+                        ->with('success','Cadastro criado com sucesso');
     }
 
     /**
@@ -59,7 +59,7 @@ class RecicleController extends Controller
      */
     public function show(Recicle $recicle)
     {
-        return view('recicle.show',compact('post'));
+        return view('recicle.show',compact('recicle'));
     }
 
     /**
@@ -70,7 +70,7 @@ class RecicleController extends Controller
      */
     public function edit(Recicle $recicle)
     {
-        return view('recicle.edit',compact('post'));
+        return view('recicle.edit',compact('recicle'));
     }
 
     /**
@@ -89,10 +89,10 @@ class RecicleController extends Controller
             'tipo_reciclagem' => 'required',
         ]);
     
-        $post->update($request->all());
+        $recicle->update($request->all());
     
         return redirect()->route('recicle.index')
-                        ->with('success','Post updated successfully');
+                        ->with('success','Cadastro atualizado com sucesso');
     }
 
     /**
@@ -103,10 +103,10 @@ class RecicleController extends Controller
      */
     public function destroy(Recicle $recicle)
     {
-        $post->delete();
+        $recicle->delete();
     
         return redirect()->route('recicle.index')
-                        ->with('success','Post deleted successfully');
+                        ->with('success','Cadastro deletado com sucesso');
 
     }
 }
