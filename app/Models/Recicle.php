@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Recicle extends Model
 {
     use HasFactory;
+
+    protected $table = "recicle";
+
+    protected $fillable = [
+        'nome', 'endereco','descricao','tipo_reciclagem'
+    ];
 }

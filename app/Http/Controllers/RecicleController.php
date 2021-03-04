@@ -14,7 +14,7 @@ class RecicleController extends Controller
      */
     public function index()
     {
-        $data = Post::latest()->paginate(5);
+        $data = Recicle::latest()->paginate(5);
     
         return view('recicle.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -39,11 +39,13 @@ class RecicleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'nome' => 'required',
+            'endereco' => 'required',
+            'descricao' => 'required',
+            'tipo_reciclagem' => 'required',
         ]);
     
-        Post::create($request->all());
+        Recicle::create($request->all());
      
         return redirect()->route('recicle.index')
                         ->with('success','Post created successfully.');
@@ -81,8 +83,10 @@ class RecicleController extends Controller
     public function update(Request $request, Recicle $recicle)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'nome' => 'required',
+            'endereco' => 'required',
+            'descricao' => 'required',
+            'tipo_reciclagem' => 'required',
         ]);
     
         $post->update($request->all());
